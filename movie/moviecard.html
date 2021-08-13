@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+<!--css-->
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+
+
+
+
+
+	<style type="text/css">
+		@charset "UTF-8";
+* {
+  box-sizing: border-box;
+}
+
+body {
+  background: transparent;
+}
+
+ .moviecard {
+  font-family: 'Helvetica', sans-serif, 'Ariel';
+  position: relative;
+  background: #ffffff;
+  color: #555555;
+  margin: 50px auto;
+  width: 850px;
+  max-width: 900px;
+  min-height: 300px;
+  padding: 30px 290px 30px 30px;
+  -moz-box-shadow: -5px 5px 15px;
+  -webkit-box-shadow: -5px 5px 15px;
+  box-shadow: -5px 5px 15px;
+  border-radius: 5px;
+}
+.moviecard #movie-content {
+  opacity: 1;
+  width: 100%;
+  display: table;
+  transition: all 500ms ease-out;
+  position: relative;
+}
+.moviecard .movie-title {
+  font-size: 36px;
+  padding-bottom: 6px;
+  color: #333333;
+}
+.moviecard .movie-title .movie-year {
+  margin-left: 12px;
+  font-size: 16px;
+}
+.moviecard .movie-title a {
+  color: #333333;
+  text-decoration: none;
+}
+.moviecard .movie-title a:hover {
+  color: #858585;
+}
+.moviecard .movie-details {
+  font-size: 12px;
+  padding-bottom: 24px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #dbdbdb;
+}
+.moviecard .movie-details span {
+  padding: 0px 6px;
+  border-right: 1px solid #dbdbdb;
+}
+.moviecard .movie-details span:last-child {
+  border: none;
+}
+.moviecard .movie-castcrew {
+  padding-top: 12px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.moviecard .movie-castcrew span.title {
+  color: #333333;
+  display: inline-block;
+  width: 80px;
+  font-weight: 600;
+}
+.moviecard .movie-synopsis {
+  margin: 24px 0px;
+  padding-top: 24px;
+  border-top: 1px solid #dbdbdb;
+  max-height: 130px;
+  height: 130px;
+  overflow-y: hidden;
+  width: 100%;
+}
+.moviecard .movie-ratings {
+  position: absolute;
+  right: 0px;
+}
+.moviecard .movie-ratings span.star {
+  display: inline-block;
+  margin-right: 12px;
+  color: #F0DE00;
+  font-size: 36px;
+}
+.moviecard .movie-ratings span.score {
+  font-size: 30px;
+  color: #333333;
+}
+.moviecard .movie-trailer-btn {
+  text-transform: uppercase;
+  outline: none;
+  padding: 15px 50px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+.moviecard .movie-trailer-btn:hover {
+  text-decoration: underline;
+}
+.moviecard .movie-trailer-btn:hover:before {
+  color: #333333;
+}
+.moviecard .movie-trailer-btn:hover:after {
+  border-color: #333333;
+}
+.moviecard .movie-trailer-btn:before {
+  content: '▸';
+  font-size: 30px;
+  color: #333333;
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  width: 22px;
+}
+.moviecard .movie-trailer-btn:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 1px solid #333333;
+  border-radius: 50%;
+  position: absolute;
+  left: 18px;
+  top: 12px;
+}
+.moviecard .movie-trailer {
+  width: 0px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  transition: all 500ms;
+  top: 0px;
+  background: #ffffff;
+  z-index: 1;
+  padding: 60px 40px 60px 60px;
+  border-radius: 5px;
+}
+.moviecard .movie-trailer a.back-btn {
+  color: #333333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px 6px 18px;
+  position: absolute;
+  top: 12px;
+  left: 300px;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+}
+.moviecard .movie-trailer a.back-btn:before {
+  content: '⌜';
+  position: absolute;
+  left: 5px;
+  top: -2px;
+  transform: rotate(-45deg);
+  font-size: 20px;
+  width: 26px;
+  height: 26px;
+}
+.moviecard .movie-trailer a.back-btn:hover {
+  color: #333;
+}
+.moviecard .movie-trailer iframe {
+  width: 100%;
+  height: 100%;
+}
+.moviecard .movie-poster {
+  position: absolute;
+  background: url("https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg");
+  background-color: #dbdbdb;
+  background-size: 360px 540px;
+  background-repeat: no-repeat;
+  height: 0;
+  width: 360px;
+  height: 540px;
+  right: -100px;
+  top: -20px;
+  -moz-box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 500ms ease-out;
+  z-index: 10;
+}
+.moviecard .movie-poster:before {
+  content: '▸';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: rgba(255, 255, 255, 0.4);
+}
+.moviecard .movie-poster:hover:before {
+  color: rgba(255, 255, 255, 0.8);
+}
+.moviecard.movie-view-trailer .movie-poster {
+  right: 600px;
+}
+.moviecard.movie-view-trailer #movie-content {
+  opacity: 0;
+  width: 0px;
+}
+.moviecard.movie-view-trailer .movie-trailer {
+  width: 100%;
+  opacity: 1;
+  padding-left: 300px;
+}
+.moviecard.movie-view-trailer .movie-trailer #youvideo {
+  height: 100%;
+}
+
+	</style>
+</head>
+<body>
+<div class="moviecard">
+  <div class="movie-poster play-trailer"></div>
+  <div id="movie-content">
+    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+    <button class="movie-trailer-btn play-trailer" type="button"><a href="#" download>Download</a></button>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+</div>
+<script type="text/javascript">
+	$(document).ready(function(){
+	$(".play-trailer").click(function(){
+		toggleVideo('show');
+		$(".moviecard").addClass("movie-view-trailer");
+	});
+
+	$(".back-btn").click(function(){
+		$(".moviecard").removeClass("movie-view-trailer");
+		toggleVideo('hide');
+	});	
+});
+
+function toggleVideo(state) {
+    // if state == 'hide', hide. Else: show video
+    var div = document.getElementById("youvideo");
+    var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+    div.style.display = state == 'hide' ? 'none' : '';
+    func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+    iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+}
+</script>
+</body>
+</html>

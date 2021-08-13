@@ -1,0 +1,1259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>moviehub</title>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="movie.css">
+<!--css-->	  
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+
+<!-- JS, Popper.js, and jQuery -->
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+		<!--fontaweesom-->
+	 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	 <!--pop-->
+	<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="https://bootswatch.com/4/cyborg/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
+	<style type="text/css">
+		@import url("https://fonts.googleapis.com/css?family=Lato:300,400,700,900");
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  font-family: "Lato", sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.all-sections {
+  display: flex;
+}
+
+
+.main-section {
+  flex: 1;
+}
+.main-section .title {
+  font-size: 30px;
+  margin-bottom: 20px;
+  color: #444c63;
+}
+
+.menu {
+  display: none;
+  cursor: pointer;
+  transition: all ease-in-out 300ms;
+}
+.menu:hover {
+  transform: scale(1.3);
+}
+
+.main-section {
+  padding: 20px 20px;
+  margin-top: 95px;
+}
+
+.thumb-wrapper {
+  width: 100%;
+  min-height: 100vh;
+}
+
+.thumb-unit {
+  width: 19%;
+  background-color: #444c63;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: bottom;
+  margin: 0px 0.5% 20px 0.5%;
+  float: left;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  opacity: 0;
+  transition: all ease-in-all 2s;
+}
+.thumb-unit.show-thumb {
+  animation: thumb ease-in-out 300ms forwards;
+}
+
+
+@keyframes thumb {
+  0% {
+    opacity: 0;
+    transform: scale(0);
+  }
+  90% {
+    transform: scale(1.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+.thumb-unit:hover .overlay {
+  transform: translate(0%);
+}
+.thumb-unit:before {
+  content: "";
+  display: block;
+  padding-top: 120%;
+}
+
+
+
+
+
+
+
+
+
+
+.thumb-unit .overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background: rgba(68, 76, 99, 0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
+  color: white;
+  transform: translateY(100%);
+  transition: all ease-in-out 300ms;
+}
+
+@keyframes change {
+  0% {
+    color: rgba(255, 255, 255, 0.5);
+  }
+  50% {
+    color: #fcaa2d;
+  }
+  100% {
+    color: rgba(255, 255, 255, 0.5);
+  }
+}
+
+
+ .icon {
+  margin-bottom: 10px;
+  padding: 10px 0px;
+  cursor: pointer;
+}
+.browse .icon span {
+  margin-left: 20px;
+}
+
+
+@media (max-width: 960px) {
+  .all-sections {
+    display: block;
+  }
+
+}
+@media (max-width: 640px) {
+  .thumb-unit {
+    width: 49%;
+  }
+}
+
+
+/*navbar*/
+
+
+/*pop*/
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+}
+
+/* Modal Content */
+.modal-content {
+  background:transparent;
+  margin: auto;
+  padding: 20px;
+  border: 0px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
+/*moviecard*/
+
+ .moviecard {
+  font-family: 'Helvetica', sans-serif, 'Ariel';
+  position: relative;
+  right: 35px;
+  background: #ffffff;
+  color: #555555;
+  margin: 50px auto;
+  width: 653px;
+  max-width: 900px;
+  min-height: 300px;
+  padding: 30px 290px 30px 30px;
+  -moz-box-shadow: -5px 5px 15px;
+  -webkit-box-shadow: -5px 5px 15px;
+  box-shadow: -5px 5px 15px;
+  border-radius: 5px;
+}
+.moviecard #movie-content {
+  opacity: 1;
+  width: 100%;
+  display: table;
+  transition: all 500ms ease-out;
+  position: relative;
+}
+.moviecard .movie-title {
+  font-size: 36px;
+  padding-bottom: 6px;
+  color: #333333;
+}
+.moviecard .movie-title .movie-year {
+  margin-left: 12px;
+  font-size: 16px;
+}
+.moviecard .movie-title a {
+  color: #333333;
+  text-decoration: none;
+}
+.moviecard .movie-title a:hover {
+  color: #858585;
+}
+.moviecard .movie-details {
+  font-size: 12px;
+  padding-bottom: 24px;
+  margin-bottom: 12px;
+  border-bottom: 1px solid #dbdbdb;
+}
+.moviecard .movie-details span {
+  padding: 0px 6px;
+  border-right: 1px solid #dbdbdb;
+}
+.moviecard .movie-details span:last-child {
+  border: none;
+}
+.moviecard .movie-castcrew {
+  padding-top: 12px;
+  width: 100%;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+}
+.moviecard .movie-castcrew span.title {
+  color: #333333;
+  display: inline-block;
+  width: 80px;
+  font-weight: 600;
+}
+.moviecard .movie-synopsis {
+  margin: 24px 0px;
+  padding-top: 24px;
+  border-top: 1px solid #dbdbdb;
+  max-height: 130px;
+  height: 130px;
+  overflow-y: hidden;
+  width: 100%;
+}
+.moviecard .movie-ratings {
+  position: absolute;
+  right: 0px;
+}
+.moviecard .movie-ratings span.star {
+  display: inline-block;
+  margin-right: 12px;
+  color: #F0DE00;
+  font-size: 36px;
+}
+.moviecard .movie-ratings span.score {
+  font-size: 30px;
+  color: #333333;
+}
+.moviecard .movie-trailer-btn {
+  text-transform: uppercase;
+  outline: none;
+  padding: 15px 50px;
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+}
+.moviecard .movie-trailer-btn:hover {
+  text-decoration: underline;
+}
+.moviecard .movie-trailer-btn:hover:before {
+  color: #333333;
+}
+.moviecard .movie-trailer-btn:hover:after {
+  border-color: #333333;
+}
+.moviecard .movie-trailer-btn:before {
+  content: '▸';
+  font-size: 30px;
+  color: #333333;
+  position: absolute;
+  top: 2px;
+  left: 18px;
+  width: 22px;
+}
+.moviecard .movie-trailer-btn:after {
+  content: "";
+  width: 20px;
+  height: 20px;
+  border: 1px solid #333333;
+  border-radius: 50%;
+  position: absolute;
+  left: 18px;
+  top: 12px;
+}
+.moviecard .movie-trailer {
+  width: 0px;
+  opacity: 0;
+  overflow: hidden;
+  position: absolute;
+  right: 0px;
+  height: 100%;
+  transition: all 500ms;
+  top: 0px;
+  background: #ffffff;
+  z-index: 1;
+  padding: 60px 40px 60px 60px;
+  border-radius: 5px;
+}
+.moviecard .movie-trailer a.back-btn {
+  color: #333333;
+  text-decoration: none;
+  font-weight: 600;
+  padding: 6px 12px 6px 18px;
+  position: absolute;
+  top: 12px;
+  left: 300px;
+  text-transform: uppercase;
+  font-size: 12px;
+  cursor: pointer;
+}
+.moviecard .movie-trailer a.back-btn:before {
+  content: '⌜';
+  position: absolute;
+  left: 5px;
+  top: -2px;
+  transform: rotate(-45deg);
+  font-size: 20px;
+  width: 26px;
+  height: 26px;
+}
+.moviecard .movie-trailer a.back-btn:hover {
+  color: #333;
+}
+.moviecard .movie-trailer iframe {
+  width: 100%;
+  height: 100%;
+}
+.moviecard .movie-poster {
+  position: absolute;
+  background-color: #dbdbdb;
+  background-size: 360px 540px;
+  background-repeat: no-repeat;
+  height: 0;
+  width: 342px;
+  height: 400px;
+  right: -100px;
+  top: 24px;
+  -moz-box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  -webkit-box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  box-shadow: -2px 2px 7px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: all 500ms ease-out;
+  z-index: 10;
+}
+.moviecard .movie-poster:before {
+  content: '▸';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 200px;
+  color: rgba(255, 255, 255, 0.4);
+}
+.moviecard .movie-poster:hover:before {
+  color: rgba(255, 255, 255, 0.8);
+}
+.moviecard.movie-view-trailer .movie-poster {
+  right: 600px;
+}
+.moviecard.movie-view-trailer #movie-content {
+  opacity: 0;
+  width: 0px;
+}
+.moviecard.movie-view-trailer .movie-trailer {
+  width: 100%;
+  opacity: 1;
+  padding-left: 90px;
+}
+.moviecard.movie-view-trailer .movie-trailer #youvideo {
+  height: 100%;
+}
+
+/*hollywood*/
+.Hollywood{
+	text-align: center;
+}
+.w3-display-topright{
+	 font-size: 46px;
+    width: 111px;
+}
+@media only screen and (max-width: 768px){
+	 .movie-poster {
+		visibility: hidden;
+	}
+	.moviecard{
+		width: 337px;
+		position: relative;
+		top: 32px;
+	}
+	#movie-content{
+		position: relative;
+		left: -20px;
+		font-size: 13px;
+	}
+	.movie-trailer{
+		visibility: hidden;
+	}
+  .click{
+    font-size: 20px;
+  }
+
+}
+.span:hover{
+  color: pink;
+}
+
+.button{
+  font-size: 23px;
+ background-color: #47d147;
+}
+.button-link{
+  padding-top: 17px;
+  font-size: 29px;
+}
+.searchbar{
+  padding-top: 10px;
+}
+/*searchbar*/
+.autocomplete {
+  position: relative;
+  display: inline-block;
+}
+
+input {
+  border: 1px solid transparent;
+  background-color: #f1f1f1;
+  padding: 10px;
+  font-size: 16px;
+}
+
+input[type=text] {
+  background-color: #f1f1f1;
+  width: 100%;
+}
+
+input[type=submit] {
+  background-color: DodgerBlue;
+  color: #fff;
+  cursor: pointer;
+}
+
+.autocomplete-items {
+  position: absolute;
+  border: 1px solid #d4d4d4;
+  border-bottom: none;
+  border-top: none;
+  z-index: 99;
+  /*position the autocomplete items to be the same width as the container:*/
+  top: 100%;
+  left: 0;
+  right: 0;
+}
+
+.autocomplete-items div {
+  padding: 10px;
+  cursor: pointer;
+  background-color: #fff; 
+  border-bottom: 1px solid #d4d4d4; 
+}
+
+/*when hovering an item:*/
+.autocomplete-items div:hover {
+  background-color: black; 
+  color: white;
+}
+
+/*when navigating through the items using the arrow keys:*/
+.autocomplete-active {
+  background-color: DodgerBlue !important; 
+  color: #ffffff; 
+}
+/*nextpage*/
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #4CAF50;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {
+  background-color: #ddd;
+}
+
+.autocomplete{
+  font-size: 35px;
+}
+
+	</style>
+</head>
+<body style="background-color: #fff;">
+    <div class="container-fluid">
+  <div class="row" style="text-align: center; padding-top: 20px;">
+    <div class="col-sm">
+     <h4 class="name" style="color: black;">MOVIES<span class="span">HUB</span></h4>
+     <p style="padding-top: -5px;">find all ur movies here!</p>
+    </div>
+    <div class="col-sm">
+      <div class="button-link">
+       <a href=""><button type="button" class="btn btn-success">Hollywood</button></a>
+       <a href=""><button type="button" class="btn btn-success">Bollywood</button></a>
+       <a href=""><button type="button" class="btn btn-success">Tollywood</button></a>
+       <a href=""><button type="button" class="btn btn-success">Dubbed</button></a>
+       <a href=""><button type="button" class="btn btn-success">Web Series</button></a>
+       </div>
+     </div>
+    <div class="col-sm">
+      <div class="searchbar">  
+      <form autocomplete="off" action="/action_page.php">
+    <div class="autocomplete">
+    <input id="myInput" type="text" name="myCountry" placeholder="Find all ur fav here..!">
+     </div>
+    <button class="button" type="submit"><i class="fa fa-search"></i></button>
+    </form>
+         </div>
+    </div>
+  </div>
+</div>
+<hr>
+<div class="all-sections">
+  <!--mainsection-->
+   <div class="container-fluid">
+   <div id="movies">
+   <div class="main-section">
+  	 <h3 class="Hollywood" id="Hollywood" style="color: black;">HOLLYWOOD</h3><br>
+    <div class="thumb-wrapper">
+      <div class="thumb-unit" style="  background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMjI5Njk0NTIyNV5BMl5BanBnXkFtZTgwNjU4MjY5MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id01').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style="  background-image: url(https://m.media-amazon.com/images/M/MV5BMjA5NjM3NTk1M15BMl5BanBnXkFtZTgwMzg1MzU2NjE@._V1_SX300.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id02').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style="background-image: url(https://i.imgur.com/1L0XOCA.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id03').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id04').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id05').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id06').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id07').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id08').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id09').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id010').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id011').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id012').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id013').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+      <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id014').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+       <div class="thumb-unit" style=" background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);">
+        <div class="overlay"><button onclick="document.getElementById('id015').style.display='block'" class="w3-button w3-black click"><i class="fa fa-eye">click here</i></button></div>
+      </div>
+    </div>
+    <br><br>
+    <!--nextpage-->
+    <div class="center">
+  <div class="pagination">
+  <a href="#">&laquo;</a>
+  <a href="#" class="active">1</a>
+  <a href="#">2</a>
+  <a href="#">3</a>
+  <a href="#">4</a>
+  <a href="#">5</a>
+  <a href="#">6</a>
+  <a href="#">&raquo;</a>
+  </div>
+</div>
+<br>
+<footer class="container-fluid" style="background-color:   #f9ffe6;">
+    <p>venkatesh<br>
+  <a href="mailto:hege@example.com">hege@example.com</a></p>
+  
+</footer>
+
+
+  </div>
+</div>
+</div>
+</div>
+
+<!--pop1-->
+    <div id="id01" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id01').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMjI5Njk0NTIyNV5BMl5BanBnXkFtZTgwNjU4MjY5MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">5.8</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Underworld:<br> Blood Wars</a><span class="movie-year">2016</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Adventure, Fantasy </span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Anna Foerster</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Cory Goodman,Kyle Ward</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name"> Kate Beckinsale, Theo James, Tobias Menzies </span></div>
+		    <div class="movie-synopsis">Vampire death dealer, Selene (Kate Beckinsale) fights to end the eternal war between the Lycan clan and the Vampire faction that betrayed her.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+	<iframe width="1280" height="720" src="https://www.youtube.com/embed/rKHL5PyAPzs" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<!--pop2-->
+    <div id="id02" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id02').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMTc0Mzc2OTQ0Ml5BMl5BanBnXkFtZTgwOTQ5MjE4MDI@._V1_SY1000_CR0,0,674,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<!--pop3-->
+    <div id="id03" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id03').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://download.eu-central-1.fromsmash.co/transfer/f~Gd_qpckw-dt/file/44fb30603436726ec29ae9e18df7736bf699d9e9?identity=4e57895a311702e84459816e94c2d8b5-3fa640edb979a5f11c6e662a42c91522abfd3b53d36865340c42a546c19df25494d8bdbe961831502ca9c769534cdff8ae86b9a761fac6b9f50cb82588dd46fc15895de4a9107a3f1e0f0ee985163dbd&Expires=1597582450&Policy=eyJTdGF0ZW1lbnQiOlt7IlJlc291cmNlIjoiaHR0cHM6Ly9kb3dubG9hZC5ldS1jZW50cmFsLTEuZnJvbXNtYXNoLmNvL3RyYW5zZmVyL2Z-R2RfcXBja3ctZHQvZmlsZS80NGZiMzA2MDM0MzY3MjZlYzI5YWU5ZTE4ZGY3NzM2YmY2OTlkOWU5P2lkZW50aXR5PTRlNTc4OTVhMzExNzAyZTg0NDU5ODE2ZTk0YzJkOGI1LTNmYTY0MGVkYjk3OWE1ZjExYzZlNjYyYTQyYzkxNTIyYWJmZDNiNTNkMzY4NjUzNDBjNDJhNTQ2YzE5ZGYyNTQ5NGQ4YmRiZTk2MTgzMTUwMmNhOWM3Njk1MzRjZGZmOGFlODZiOWE3NjFmYWM2YjlmNTBjYjgyNTg4ZGQ0NmZjMTU4OTVkZTRhOTEwN2EzZjFlMGYwZWU5ODUxNjNkYmQiLCJDb25kaXRpb24iOnsiRGF0ZUxlc3NUaGFuIjp7IkFXUzpFcG9jaFRpbWUiOjE1OTc1ODI0NTB9fX1dfQ__&Signature=VLpEfG1uNgqtli2ltkA1te7tMhStbAOJYluiTIK0V5PPaLqWb1InIVZkwQMM3qOmty9oWokIHUEgn-vQv4FYB6xu0MM8SOWCJMRRNJcK0NcV-MGKJ2KetuBoGu6cSubvsfVlH~UbqtD6Nvi0DLkgDnXGFtNtKRJMRWAPAnKtsgeuK-TB666YjX3iRhi-vyWhNKnyfV9vV1X5RVIpRbeNCHMFRa78gTIfa5CwagMKK7WrdfxBFWwOuvvN8VyQ--MNFrewZhj38gakD68lKrciN-KsUr1GTfdQYYtSfDBUbpW3abtii1YgN0mr37PnA1u1Z~bI5lYnGnCiRAGHEozX9g__&Key-Pair-Id=APKAIM76HR2FWFZRN3HA" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+<!--pop4-->
+    <div id="id04" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id04').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop5-->
+    <div id="id05" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id05').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BMzcwMjkxMzQ3NV5BMl5BanBnXkFtZTgwMzgyNDA5MDI@._V1_SY1000_CR0,0,640,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">5.2</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">
+xXx:<br> Return of Xander Cage</a><span class="movie-year">2017</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre"> Action, Adventure, Thriller</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name"> D.J. Caruso</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Rich Wilkes,F. Scott Frazier</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name"> Vin Diesel, Donnie Yen, Deepika Padukone </span></div>
+		    <div class="movie-synopsis">Xander Cage is left for dead after an incident, though he secretly returns to action for a new, tough assignment with his handler Augustus Gibbons.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+	<iframe width="1280" height="720" src="https://www.youtube.com/embed/xEuM4IUFWu8" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>   
+	</div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop6-->
+    <div id="id06" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id06').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop7-->
+    <div id="id07" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id07').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+		    <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop8-->
+    <div id="id08" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id08').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop9-->
+    <div id="id09" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id09').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop10-->
+    <div id="id010" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id010').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop11-->
+    <div id="id011" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id011').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop12-->
+    <div id="id012" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id012').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop13-->
+    <div id="id013" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id013').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn-primary"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop14-->
+    <div id="id014" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id014').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn btn-success"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop15-->
+    <div id="id015" class="w3-modal">
+    <div class="w3-modal-content">
+    <div class="w3-container">
+    <span onclick="document.getElementById('id015').style.display='none'" class="w3-button w3-display-topright">&times;</span>
+    <div class="moviecard">
+	<div class="movie-poster play-trailer" style="background-image: url(https://images-na.ssl-images-amazon.com/images/M/MV5BZTJiNGM2NjItNDRiYy00ZjY0LTgwNTItZDBmZGRlODQ4YThkL2ltYWdlXkEyXkFqcGdeQXVyMjY5ODI4NDk@._V1_SY1000_CR0,0,675,1000_AL_.jpg);"></div>
+	<div id="movie-content">
+		    <div class="movie-ratings"><span class="star">★</span><span class="score">7.7</span><span class="score-out-of">/ 10 (IMDB)</span></div>
+		    <div class="movie-title"><a href="http://www.imdb.com/title/tt3397884" target="_blank">Sicario</a><span class="movie-year">2015</span></div>
+		    <div class="movie-details"><span class="movie-rating">R</span><span class="movie-duration">2h 1min</span><span class="movie-genre">Action, Crime, Drama</span></div>
+		    <div class="movie-castcrew"><span class="title">Director</span><span class="name">Denis Villeneuve</span></div>
+		    <div class="movie-castcrew"><span class="title">Writer</span><span class="name">Taylor Sheridan</span></div>
+		    <div class="movie-castcrew"><span class="title">Cast</span><span class="name">Emily Blunt, Josh Brolin, Benicio Del Toro</span></div>
+		    <div class="movie-synopsis">An idealistic FBI agent is enlisted by a government task force to aid in the escalating war against drugs at the border area between the U.S. and Mexico.</div>
+        <a href="https://firebasestorage.googleapis.com/v0/b/green-link-272616.appspot.com/o/1%2FM%2FOMG%2FOMG-Oh.My.God.720p.themoviesflix.in.mkv?alt=media&token=d822e78b-fc74-45fb-b434-137edc86237d" target="_blank" download><button class="btn btn-success"  type="button">Download</button></a>
+  </div>
+  <div class="movie-trailer"><a class="back-btn">back</a>
+    <div id="youvideo">
+ 	<iframe src="https://www.youtube.com/embed/79Sd4GtOXuI" frameborder="0" allowfullscreen="allowfullscreen" allowScriptAccess="always"></iframe>
+    </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  </div>
+  <!--pop16-->
+   
+
+
+ <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"> 
+    </script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+
+  
+
+<script type="text/javascript">
+	$(document).ready(function(){
+ showStuff();
+  footShow();
+  thumbStuff(); 
+});
+  
+
+ 
+function footShow() {
+  setTimeout(function(){
+     $('.unit').addClass('move-shit');
+  }, 4000);
+
+}
+
+
+function showStuff() {
+  
+  $('.face-unit').each(function(i){
+    setTimeout(function(){
+    $('.face-unit').eq(i).addClass('show-shit');      
+    }, (300 * i));
+    
+  });
+  
+}
+
+
+function thumbStuff() {
+  $('.thumb-unit').each(function(i){
+    
+    setTimeout(function(){
+    $('.thumb-unit').eq(i).addClass('show-thumb');  
+    }, (150 * i));
+    
+  });
+} 
+
+	// Sticky Header
+$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+    if (scroll >= 100) {
+        $(".top-nav").addClass("light-header");
+    } else {
+        $(".top-nav").removeClass("light-header");
+    }
+});
+
+
+
+
+	$(document).ready(function(){
+	$(".play-trailer").click(function(){
+		toggleVideo('show');
+		$(".moviecard").addClass("movie-view-trailer");
+	});
+
+	$(".back-btn").click(function(){
+		$(".moviecard").removeClass("movie-view-trailer");
+		toggleVideo('hide');
+	});	
+});
+
+function toggleVideo(state) {
+    // if state == 'hide', hide. Else: show video
+    var div = document.getElementById("youvideo");
+    var iframe = div.getElementsByTagName("iframe")[0].contentWindow;
+    div.style.display = state == 'hide' ? 'none' : '';
+    func = state == 'hide' ? 'pauseVideo' : 'playVideo';
+    iframe.postMessage('{"event":"command","func":"' + func + '","args":""}', '*');
+}
+
+
+
+//searchbar
+function autocomplete(inp, arr) {
+  /*the autocomplete function takes two arguments,
+  the text field element and an array of possible autocompleted values:*/
+  var currentFocus;
+  /*execute a function when someone writes in the text field:*/
+  inp.addEventListener("input", function(e) {
+      var a, b, i, val = this.value;
+      /*close any already open lists of autocompleted values*/
+      closeAllLists();
+      if (!val) { return false;}
+      currentFocus = -1;
+      /*create a DIV element that will contain the items (values):*/
+      a = document.createElement("DIV");
+      a.setAttribute("id", this.id + "autocomplete-list");
+      a.setAttribute("class", "autocomplete-items");
+      /*append the DIV element as a child of the autocomplete container:*/
+      this.parentNode.appendChild(a);
+      /*for each item in the array...*/
+      for (i = 0; i < arr.length; i++) {
+        /*check if the item starts with the same letters as the text field value:*/
+        if (arr[i].substr(0, val.length).toUpperCase() == val.toUpperCase()) {
+          /*create a DIV element for each matching element:*/
+          b = document.createElement("DIV");
+          /*make the matching letters bold:*/
+          b.innerHTML = "<strong>" + arr[i].substr(0, val.length) + "</strong>";
+          b.innerHTML += arr[i].substr(val.length);
+          /*insert a input field that will hold the current array item's value:*/
+          b.innerHTML += "<input type='hidden' value='" + arr[i] + "'>";
+          /*execute a function when someone clicks on the item value (DIV element):*/
+          b.addEventListener("click", function(e) {
+              /*insert the value for the autocomplete text field:*/
+              inp.value = this.getElementsByTagName("input")[0].value;
+              /*close the list of autocompleted values,
+              (or any other open lists of autocompleted values:*/
+              closeAllLists();
+          });
+          a.appendChild(b);
+        }
+      }
+  });
+  /*execute a function presses a key on the keyboard:*/
+  inp.addEventListener("keydown", function(e) {
+      var x = document.getElementById(this.id + "autocomplete-list");
+      if (x) x = x.getElementsByTagName("div");
+      if (e.keyCode == 40) {
+        /*If the arrow DOWN key is pressed,
+        increase the currentFocus variable:*/
+        currentFocus++;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 38) { //up
+        /*If the arrow UP key is pressed,
+        decrease the currentFocus variable:*/
+        currentFocus--;
+        /*and and make the current item more visible:*/
+        addActive(x);
+      } else if (e.keyCode == 13) {
+        /*If the ENTER key is pressed, prevent the form from being submitted,*/
+        e.preventDefault();
+        if (currentFocus > -1) {
+          /*and simulate a click on the "active" item:*/
+          if (x) x[currentFocus].click();
+        }
+      }
+  });
+  function addActive(x) {
+    /*a function to classify an item as "active":*/
+    if (!x) return false;
+    /*start by removing the "active" class on all items:*/
+    removeActive(x);
+    if (currentFocus >= x.length) currentFocus = 0;
+    if (currentFocus < 0) currentFocus = (x.length - 1);
+    /*add class "autocomplete-active":*/
+    x[currentFocus].classList.add("autocomplete-active");
+  }
+  function removeActive(x) {
+    /*a function to remove the "active" class from all autocomplete items:*/
+    for (var i = 0; i < x.length; i++) {
+      x[i].classList.remove("autocomplete-active");
+    }
+  }
+  function closeAllLists(elmnt) {
+    /*close all autocomplete lists in the document,
+    except the one passed as an argument:*/
+    var x = document.getElementsByClassName("autocomplete-items");
+    for (var i = 0; i < x.length; i++) {
+      if (elmnt != x[i] && elmnt != inp) {
+        x[i].parentNode.removeChild(x[i]);
+      }
+    }
+  }
+  /*execute a function when someone clicks in the document:*/
+  document.addEventListener("click", function (e) {
+      closeAllLists(e.target);
+  });
+}
+
+/*An array containing all the country names in the world:*/
+var countries = ["Afghanistan","Albania","hero","Andorra","Angola","Anguilla","Antigua & Barbuda","Argentina","Armenia","Aruba","Australia","Austria","Azerbaijan","Bahamas","Bahrain","Bangladesh","Barbados","Belarus","Belgium","Belize","Benin","Bermuda","Bhutan","Bolivia","Bosnia & Herzegovina","Botswana","Brazil","British Virgin Islands","Brunei","Bulgaria","Burkina Faso","Burundi","Cambodia","Cameroon","Canada","Cape Verde","Cayman Islands","Central Arfrican Republic","Chad","Chile","China","Colombia","Congo","Cook Islands","Costa Rica","Cote D Ivoire","Croatia","Cuba","Curacao","Cyprus","Czech Republic","Denmark","Djibouti","Dominica","Dominican Republic","Ecuador","Egypt","El Salvador","Equatorial Guinea","Eritrea","Estonia","Ethiopia","Falkland Islands","Faroe Islands","Fiji","Finland","France","French Polynesia","French West Indies","Gabon","Gambia","Georgia","Germany","Ghana","Gibraltar","Greece","Greenland","Grenada","Guam","Guatemala","Guernsey","Guinea","Guinea Bissau","Guyana","Haiti","Honduras","Hong Kong","Hungary","Iceland","India","Indonesia","Iran","Iraq","Ireland","Isle of Man","Israel","Italy","Jamaica","Japan","Jersey","Jordan","Kazakhstan","Kenya","Kiribati","Kosovo","Kuwait","Kyrgyzstan","Laos","Latvia","Lebanon","Lesotho","Liberia","Libya","Liechtenstein","Lithuania","Luxembourg","Macau","Macedonia","Madagascar","Malawi","Malaysia","Maldives","Mali","Malta","Marshall Islands","Mauritania","Mauritius","Mexico","Micronesia","Moldova","Monaco","Mongolia","Montenegro","Montserrat","Morocco","Mozambique","Myanmar","Namibia","Nauro","Nepal","Netherlands","Netherlands Antilles","New Caledonia","New Zealand","Nicaragua","Niger","Nigeria","North Korea","Norway","Oman","Pakistan","Palau","Palestine","Panama","Papua New Guinea","Paraguay","Peru","Philippines","Poland","Portugal","Puerto Rico","Qatar","Reunion","Romania","Russia","Rwanda","Saint Pierre & Miquelon","Samoa","San Marino","Sao Tome and Principe","Saudi Arabia","Senegal","Serbia","Seychelles","Sierra Leone","Singapore","Slovakia","Slovenia","Solomon Islands","Somalia","South Africa","South Korea","South Sudan","Spain","Sri Lanka","St Kitts & Nevis","St Lucia","St Vincent","Sudan","Suriname","Swaziland","Sweden","Switzerland","Syria","Taiwan","Tajikistan","Tanzania","Thailand","Timor L'Este","Togo","Tonga","Trinidad & Tobago","Tunisia","Turkey","Turkmenistan","Turks & Caicos","Tuvalu","Uganda","Ukraine","United Arab Emirates","United Kingdom","United States of America","Uruguay","Uzbekistan","Vanuatu","Vatican City","Venezuela","Vietnam","Virgin Islands (US)","Yemen","Zambia","Zimbabwe"];
+
+/*initiate the autocomplete function on the "myInput" element, and pass along the countries array as possible autocomplete values:*/
+autocomplete(document.getElementById("myInput"), countries);
+
+</script>
+</body>
+</html>
